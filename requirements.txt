@@ -1,0 +1,9 @@
+Flask
+Flask-SQLAlchemy
+Flask-JWT-Extended
+Flasgger
+psycopg2-binary
+pydantic
+pytest
+python-dateutil
+flask-swagger-ui
