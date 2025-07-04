@@ -14,7 +14,7 @@ def app():
     app = create_app({
         "TESTING": True,
         "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
-        "JWT_SECRET_KEY": "test-secret"
+        "JWT_SECRET_KEY": "doktorpavlovicbokkiropraktike"
     })
     with app.app_context():
         db.create_all()
