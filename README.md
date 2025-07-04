@@ -1,37 +1,100 @@
-# Home Budget API
+# HomeBudget API
 
-A Flask-based REST API for managing personal budgets: user registration, JWT auth, CRUD on categories and expenses, filtering, and spending stats.
+This guide walks you through running the HomeBudget API with Docker Compose and accessing the built‑in Swagger documentation.
 
-## Quickstart
+---
 
-1. **Docker**
-   ```bash
-   docker-compose up --build
-   ```
-   API available at http://localhost:5000
+## Prerequisites
 
-2. **Without Docker**
-   ```bash
-   pip install -r requirements.txt
-   export DATABASE_URL=postgresql://<user>:<pw>@localhost:5432/homebudget
-   flask run
-   ```
+* Docker installed
+* Docker Compose installed
 
-## API Docs
-Browse interactive Swagger UI at http://localhost:5000/apidocs
+---
 
-## Testing
-```bash
-pytest
+## Project Layout
+
+```
+homebudget/
+  ├── __init__.py
+  ├── config.py
+  ├── models/
+  ├── routes/
+  ├── schemas.py
+  ├── static/
+  └── ...
+tests/
+Dockerfile
+requirements.txt
+docker-compose.yml
+README.md
 ```
 
-## Endpoints
-| Path             | Method   | Auth | Description                |
-|------------------|----------|------|----------------------------|
-| /auth/register   | POST     | No   | Register new user          |
-| /auth/login      | POST     | No   | Get JWT token              |
-| /categories      | GET,POST | Yes  | List/Create categories     |
-| /categories/<id> | DELETE   | Yes  | Delete category            |
-| /expenses        | GET,POST | Yes  | List/Create expenses       |
-| /expenses/<id>   | DELETE   | Yes  | Delete expense             |
-| /expenses/stats  | GET      | Yes  | Spending stats             |
+---
+
+## Environment Variables
+
+Configured in `docker-compose.yml`:
+
+* `DATABASE_URL`
+* `JWT_SECRET`
+* `FLASK_APP`
+* `FLASK_ENV`
+
+---
+
+## Docker Compose Commands
+
+### 1. Build & Start Services
+
+```bash
+docker-compose up --build -d
+```
+
+### 2. Check Status
+
+```bash
+docker-compose ps
+```
+
+### 3. Stream Logs
+
+```bash
+docker-compose logs -f web
+```
+
+### 4. Stop Services
+
+```bash
+docker-compose down
+```
+
+### 5. Full Teardown
+
+```bash
+docker-compose down -v
+```
+
+---
+
+## Running Tests
+
+```bash
+docker-compose run --rm web pytest -q
+```
+
+---
+
+## Accessing the API
+
+* Base URL: `http://localhost:5000`
+* Swagger UI: `http://localhost:5000/apidocs/`
+
+---
+
+## Database Reset
+
+```bash
+docker-compose down -v
+docker-compose up --build -d
+```
+
